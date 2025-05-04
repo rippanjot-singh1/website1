@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .animated-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .animated-element.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .main-content {
+            animation-delay: 0.2s;
+        }
+
+        .custom-button {
+            @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 md:py-4 px-6 md:px-8 text-base md:text-lg font-semibold rounded-md transition-colors duration-300;
+            @apply hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2;
+            position: relative;
+            overflow: hidden;
+            transition:  0.3s ease;
+            color: rgb(58, 64, 255);
+        }
+
+        .custom-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.117);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .custom-button:hover::after {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .custom-button:hover {
+            transform: translateY(-2px);
+             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+       .custom-button:active{
+          transform: translateY(0);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       }
+
+        input:focus,
+        textarea:focus {
+            @apply ring-2 ring-purple-500/50 ring-offset-2 border-transparent;
+        }
+
+        .error-message {
+            @apply text-red-400 text-sm mt-1;
+        }
+
+        .nav-link {
+            color: white;
+            @apply text-blue-400 hover:text-purple-400  text-sm md:text-base font-medium transition-colors duration-300;
+            transition: transform 0.2s ease-in-out;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+        }
+        .nav-container{
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-link:hover {
+             transform: translateY(-2px);
+             border-bottom-color: #a953f9;
+        }
+
+        .image-column {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .image-column {
+                display: flex;
+            }
+        }
+
+        .about-us-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        @media (min-width: 768px) {
+            .about-us-image {
+                max-width: 80%;
+            }
+        }
+
+        .intro-section {
+            display: flex; /* Use flexbox */
+            flex-direction: row; /* Arrange items in a row */
+            align-items: center; /* Vertically align items */
+            justify-content: center; /* Horizontally center items */
+            text-align: center;
+            margin-bottom: 2rem;
+            gap: 2rem; /* Add some space between the images and text */
+        }
+
+        .intro-image-container {  /*container added*/
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-image {
+            max-width: 150px; /* Adjust image size as needed */
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 0.5rem; /* Space between image and name */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 2px solid #e0e0e0;
+        }
+
+        .intro-text {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px){
+           .intro-image{
+             max-width: 100%;
+           }
+        }
+        .story-section{
+            padding: 2rem;
+            border-radius: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+        }
+        .team-section{
+           padding: 2rem;
+            border-radius: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+        }
+        .mission-section{
+            padding: 2rem;
+            border-radius: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+        }
+        .vision-section{
+            padding: 2rem;
+            border-radius: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+        }
+        #footer {
+            background-color: #19212d4a;
+            color: #d1d5db;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+        #footer p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+        #footer a {
+            color: #a855f7;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        #footer a:hover {
+            color: #f5d0fe;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-black p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white/5 backdrop-blur-md rounded-xl shadow-lg border border-white/10 p-4 md:p-6 lg:p-8">
+        <header class="text-center py-8 animated-element appear">
+            <h1 class="text-4xl font-bold text-white mb-4 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+                About Us
+            </h1>
+            <p class="text-lg text-gray-300 mb-6">
+                We are a creative studio building digital products, brands, and experiences.
+            </p>
+        </header>
+        <div class = "nav-container">
+            <a href="copy.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="portfolio.html" class="nav-link">Portfolio</a>
+            <a href="blog.html" class="nav-link">Blogs</a>
+            <a href="contact.html" class="nav-link">Contact us</a>
+        </div>
+
+        <section class="intro-section animated-element">
+            <div class = "intro-image-container">
+                <img src="pic/IMG_20250420_164019_735 (2).webp" width="200px" height="200px" alt="Your Photo" class="intro-image">
+                <p class = "text-white">rippanjot | CEO</p>
+            </div>
+             <div  class = "intro-image-container">
+                <img src="" width="200px" height="200px" alt="Your Photo" class="intro-image">
+                 <p class = "text-white">Harsh kumar | COO</p>
+            </div>
+            <p class="intro-text text-purple-300">
+                Hello! We are Rippanjot and Harsh Kumar, young entrepreneurs with a passion for business and learning. We envision becoming a world-class digital marketing agency, providing comprehensive digital services. We are working hard to make this vision a reality.
+            </p>
+        </section>
+
+        <section class="flex flex-col md:flex-row gap-8 animated-element story-section">
+            <div class="main-content  prose prose-invert text-gray-300 space-y-4 md:space-y-6">
+                <h2 class="text-2xl font-semibold text-white">Our Story</h2>
+                <p>
+                    We are young enterpreneurs who thought not to get in the trap of jobs. Our passion about business and learning is our biggest strentgh. Whenever we decides to do something, we become completely engrossed in it.
+                </p>
+                <p>
+                    We believe in hardwork and emplimentation. These values guide everything we do, from
+                    the way we interact with our customers to the way we develop our services.
+                    We are committed to  sustainability, innovation, learning and
+                    customer satisfaction. this helps us keep moving forward.
+                </p>
+            </div>
+        </section>
+
+        <section class="animated-element team-section">
+            <div class="main-content prose prose-invert text-gray-300 space-y-4 md:space-y-6">
+                <h2 class="text-2xl font-semibold text-white">Our Team</h2>
+                <p>
+                    Our team is our greatest asset.  We are a small group of talented individuals
+                    with a shared passion for our goal. Each member brings unique skills and experience to the table.
+                    We foster a collaborative and supportive environment where creativity and
+                    innovation can thrive.
+                </p>
+            </div>
+        </section>
+
+        <section class="animated-element mission-section">
+            <div class="main-content prose prose-invert text-gray-300 space-y-4 md:space-y-6">
+                <h2 class="text-2xl font-semibold text-white">Our Mission</h2>
+                <p>
+                    Our mission is to get small businesses who cannot make a 'powerful presence' to the level everybody knows about them. 
+                    We are driven by a desire to make a world class digital marketing agency who can solve and provide any kind of digital service to the business.
+                </p>
+            </div>
+        </section>
+
+        <section class="animated-element vision-section">
+            <div class="main-content prose prose-invert text-gray-300 space-y-4 md:space-y-6">
+                <h2 class="text-2xl font-semibold text-white">Our Vision</h2>
+                <p>
+                    Our vision is to get the digital marketing experience to another level.  We see a future where
+                    businesses can take every type of digital services at one place.  We are working hard to make this vision a
+                    reality through our planning hardworking and execution.
+                </p>
+            </div>
+        </section>
+
+        <div class="mt-8 text-center">
+                <a href="contact.html" class="custom-button">Contact Us</a>
+            </div>
+            <br/>
+            <footer id="footer">
+                <p>&copy; 2025. All rights reserved. | Designed by <a href="https://www.intagram.com/dg.rippanjot?igsh=ejVpbjdhYzNkMDc5" target="_blank" rel="noopener noreferrer">dg.rippanjot</a></p>
+            </footer>
+    </div>
+
+    <script>
+        const animatedElements = document.querySelectorAll('.animated-element');
+
+        function showElements() {
+            animatedElements.forEach(element => {
+                element.classList.add('appear');
+            });
+        }
+
+        window.addEventListener('load', showElements);
+    </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .animated-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .animated-element.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .custom-button {
+            @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 md:py-4 text-base md:text-lg font-semibold rounded-md transition-colors duration-300;
+            @apply hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2;
+            position: relative;
+            overflow: hidden;
+            color: #0569ff;
+            transition: 0.3s ease;
+        }
+        .custom-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.186);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            opacity: 0;
+        }
+        .custom-button:hover::after {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .custom-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .custom-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        input:focus,
+        textarea:focus {
+            @apply ring-2 ring-purple-500/50 ring-offset-2 border-transparent;
+        }
+        .error-message {
+            @apply text-red-400 text-sm mt-1;
+        }
+        .nav-link {
+            color:white;
+            @apply text-blue-400 hover:text-purple-400 hover:underline text-sm md:text-base font-medium transition-colors duration-300;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+            border-radius: 0.5rem;
+            transition: transform 0.2s ease-in-out, border-bottom 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link:hover {
+            transform: translateY(-3px) scale(1.06);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
+            border-bottom-color: #a855f7;
+        }
+        .nav-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            border-radius: 0.75rem;
+            border: 0.2px solid #a953f9;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.1), 0 3px 7px -2px rgba(0, 0, 0, 0.15);
+        }
+        .service-icon {
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .insta{
+            transition: transform 0.2s ease-in-out;
+            color: #4c94ff;
+        }
+        #footer a {
+            color: #a855f7;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        #footer {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+        }
+    
+        #footer p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+        #footer a:hover {
+            color: #f5d0fe;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-black p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white/5 backdrop-blur-md rounded-xl shadow-lg border border-white/10 p-4 md:p-6 lg:p-8">
+        <header class="text-center py-8 animated-element appear">
+            <h1 class="text-4xl font-bold text-white mb-4 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+                Our Services
+            </h1>
+            <p class="text-lg text-purple-300 mb-6">
+                Explore our range of services designed to meet your needs.
+            </p>
+        </header>
+
+        <nav class="nav-container">
+            <a href="copy.html" class="nav-link">Home</a>
+            <a href="index.html" class="nav-link">About</a>
+            <a href="portfolio.html" class="nav-link">Portfolio</a>
+            <a href="blog.html" class="nav-link">Blogs</a>
+            <a href="contact.html" class="nav-link">Contact us</a>
+        </nav>
+
+        <section id="services" class="py-10 animated-element appear">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Web Development</h3>
+                    <p class="text-gray-300">
+                     Coming Soon...
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Social Media Management</h3>
+                    <p class="text-gray-300">
+                        Reclaim your time and boost your brand! Our social media management connects you with your audience and drives online results effortlessly.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📖</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">SEO Copywriting</h3>
+                    <p class="text-gray-300">
+                        We craft compelling and persuasive copy that captures your brand's voice and drives conversions.
+                        Our copywriting services include website content, marketing materials, and ad copy.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📈</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Digital Marketing</h3>
+                    <p class="text-gray-300">
+                        We provide comprehensive digital marketing solutions to help you reach your target audience.
+                        Our services include SEO, social media marketing, and PPC advertising.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✍️</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Content writing</h3>
+                    <p class="text-gray-300">
+                        We write high-quality content that engages your audience and drives results.
+                        Our content creation services include copywriting, blog posts, and video production.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Search Engine Optimization</h3>
+                    <p class="text-gray-300">
+                        Our expert service crafts persuasive content for websites, marketing materials, and beyond. We transform your ideas into powerful language that resonates, engages, and ultimately achieves your business goals.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"> 📧</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Email Marketing</h3>
+                    <p class="text-gray-300">
+                        We help you connect with your audience through targeted email campaigns that drive engagement and conversions.
+                        Our email marketing services include strategy, design, content creation, and analytics.
+                    </p>
+                 </div>
+                 <div class="service-card">
+                    <div class="service-icon"> 🔍</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Market Research</h3>
+                    <p class="text-gray-300">
+                       We provide valuable insights into market trends, competitor analysis, and consumer behavior.
+                       Our market research services help businesses make informed decisions.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 class="text-xl font-semibold text-purple-300 mb-4">Graphic Design</h3>
+                    <p class="text-gray-300">
+                        We offer creative graphic design solutions that capture your brand's essence and visually communicate your message.
+                        Our design services include logo design, branding, marketing collateral, and web graphics.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10 animated-element appear">
+            <h2 class="text-3xl font-semibold text-white text-center mb-8">
+                Ready to Get Started?
+            </h2>
+            <div class="text-center">
+                <a href="contact.html" class="custom-button">Contact Us</a>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <p>&copy; 2025. All rights reserved. | Designed by <a href="https://www.intagram.com/dg.rippanjot?igsh=ejVpbjdhYzNkMDc5" target="_blank" rel="noopener noreferrer">dg.rippanjot</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElements = document.querySelectorAll('.animated-element');
+        function showElements() {
+            animatedElements.forEach(element => {
+                element.classList.add('appear');
+            });
+        }
+        window.addEventListener('load', showElements);
+    </script>
+</body>
+</html>
