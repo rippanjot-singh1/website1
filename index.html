@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #111827;
+        }
+        .animated-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .animated-element.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .custom-button {
+            @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 md:py-4 px-6 md:px-8 text-base md:text-lg font-semibold rounded-md transition-colors duration-300;
+            @apply hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-50/50 focus:ring-offset-2;
+            border-radius: 0.5rem;
+            color: #0569ff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .custom-button:hover {
+            transform: translateY(-3px) scale(1.06);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
+        }
+        .custom-button:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        input:focus,
+        textarea:focus {
+            @apply ring-2 ring-purple-500/50 ring-offset-2 border-transparent;
+        }
+        .error-message {
+            @apply text-red-400 text-sm mt-1;
+        }
+        .nav-link {
+            @apply text-blue-300 hover:text-purple-300 text-sm md:text-base font-medium transition-colors duration-300;
+            transition: transform 0.2s ease-in-out, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            color: white;
+        }
+        .nav-link:hover {
+            transform: translateY(-2px);
+            border-bottom-color: #a855f7;
+            transform: translateY(-3px) scale(1.06);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
+        }
+        .nav-link.active {
+            @apply text-white border-purple-500;
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .nav-container {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .about-us-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease-in-out;
+        }
+        .about-us-image:hover {
+            transform: scale(1.03);
+        }
+        @media (min-width: 768px) {
+            .about-us-image {
+                max-width: 85%;
+            }
+        }
+        .intro-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .intro-image {
+            max-width: 85%;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.25);
+            border: 3px solid #4c1d95;
+            transition: transform 0.3s ease-in-out;
+        }
+        .intro-image:hover {
+            transform: scale(1.04);
+        }
+        .intro-text {
+            font-size: 1.15rem;
+            color: #e2e8f0;
+            line-height: 1.7;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .intro-image {
+                max-width: 100%;
+            }
+        }
+        #hero {
+            background: linear-gradient(to bottom, rgba(56, 23, 105, 0.8), rgba(17, 24, 39, 0.95)), url('pic/digital-marketing1.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease, pulse 2s infinite alternate;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.04); }
+        }
+        #hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+            animation: slideInDown 1s ease, colorChange 3s infinite alternate;
+        }
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes colorChange {
+            from { color: white; }
+            to { color: #f5d0fe; }
+        }
+        #hero p {
+            font-size: 1.3rem;
+            color: #f3f4f6;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            line-height: 1.8;
+            max-width: 85%;
+            animation: fadeIn 1s ease, slideInLeft 1s ease;
+        }
+        @keyframes slideInLeft {
+            from{
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to{
+                transform: translateX(0px);
+                opacity: 1;
+            }
+        }
+        #hero .cta-button {
+            @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 md:py-4 px-6 md:px-8 text-base md:text-lg font-semibold rounded-md transition-colors duration-300;
+            @apply hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2;
+            border-radius: 0.5rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            animation: pulseButton 2s infinite alternate;
+        }
+        @keyframes pulseButton {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        #hero .cta-button:hover {
+            transform: translateY(-3px) scale(1.06);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25);
+        }
+        #hero .cta-button:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #footer {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 3rem ;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            animation: slideInUp 1s ease;
+            border-radius: 0.5rem;
+        }
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        #footer p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+        #footer a {
+            color: #a855f7;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        #footer a:hover {
+            color: #f5d0fe;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            animation: zoomIn 1s ease;
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .section-header p {
+            font-size: 1.1rem;
+            color: #e5e7eb;
+            line-height: 1.7;
+            max-width: 75%;
+            margin: 0 auto;
+            animation: fadeIn 1s ease;
+        }
+        .service-card {
+            border: 1px solid #a855f7;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2);
+            
+            padding: 2.5rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 8px 18px -2px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.25rem;
+            transition: color 0.3s ease;
+        }
+        .service-card:hover h3{
+            color: #a855f7;
+        }
+        .service-card p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            line-height: 1.7;
+        }
+        .portfolio-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+            border: 1px solid #a855f7;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 8px 18px -2px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .portfolio-item h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.25rem;
+            transition: color 0.3s ease;
+        }
+        .portfolio-item:hover h3{
+            color: #a855f7;
+        }
+        .portfolio-item p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            line-height: 1.7;
+        }
+        .cta-button{
+            color: #0569ff;
+        }
+        .insta{
+            transition: transform 0.2s ease-in-out;
+            color: #4c94ff;
+        }
+        .nav-link:hover {
+            transform: translateY(-2px);
+        }
+        #footer {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            animation: slideInUp 1s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #footer-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            #footer-top {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: flex-start;
+                padding: 0 2rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        #footer-top .footer-section {
+            margin-bottom: 2rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            #footer-top .footer-section {
+                margin-bottom: 0;
+                width: 30%;
+            }
+        }
+
+        #footer-top .footer-section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        #footer-top .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #footer-top .footer-section ul li {
+            margin-bottom: 1rem;
+        }
+
+        #footer-top .footer-section ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #footer-top .footer-section ul li a:hover {
+            color: #a855f7;
+        }
+
+        #footer-form {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        #footer-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #footer-form label {
+            color: #d1d5db;
+            font-size: 1rem;
+            font-weight: normal;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        #footer-form input,
+        #footer-form textarea {
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #4b5563;
+            background-color: #1f2937;
+            color: #d1d5db;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            width: 100%;
+            outline: none;
+        }
+
+        #footer-form input:focus,
+        #footer-form textarea:focus {
+            border-color: #a855f7;
+           
+        }
+
+        #footer-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        #footer-form button {
+            @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 px-6 text-base font-semibold rounded-md transition-colors duration-300;
+            @apply hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        #footer-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #footer-form button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            #footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1rem;
+            }
+        }
+
+        #footer-bottom .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            #footer-bottom .social-icons {
+                margin-bottom: 0;
+            }
+        }
+
+        #footer-bottom .social-icons a {
+            color: #d1d5db;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        #footer-bottom .social-icons a:hover {
+            color: #a855f7;
+            transform: scale(1.2);
+        }
+
+        #footer-bottom .copyright {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .blog-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-blur: 10px;
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 8px 18px -2px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            transition: opacity 0.3s ease; /* Added for smooth transition */
+        }
+
+        .blog-card:hover img {
+            opacity: 0.8; /* Reduced opacity on hover */
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .blog-card:hover .blog-card-title {
+            color: #a855f7;
+        }
+
+        .blog-card-text {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #a855f7;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .blog-card-link:hover {
+            color: #f5d0fe;
+            transform: translateX(5px);
+        }
+
+        .blog-card-link svg {
+            width: 1rem;
+            height: 1rem;
+            stroke-width: 2.5;
+        }
+        #popup-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    #popup-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    #popup {
+        background-color: #1f2937;
+        padding: 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 90%;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        border: 1px solid #4b5563;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #popup.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    #popup h2 {
+        font-size: 2rem;
+        color: #ffffff;
+        margin-bottom: 1rem;
+    }
+    #popup p {
+        font-size: 1.1rem;
+        color: #d1d5db;
+        margin-bottom: 1.5rem;
+    }
+    #popup form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    #popup form input {
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid #4b5563;
+        width: 100%;
+        font-size: 1rem;
+        outline: none;
+        background-color: #1f2937;
+        color: #d1d5db;
+    }
+    #popup form input:focus {
+        border-color: #a855f7;
+        box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+    }
+    #popup form button {
+        @apply bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 px-6 text-base font-semibold rounded-md transition-colors duration-300;
+        @apply hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:ring-offset-2;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1.1rem;
+    }
+    #popup form button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    #popup form button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        color: #d1d5db;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+    .close-button:hover {
+        color: #a855f7;
+    }
+    .popup-image {
+        margin-top: 1.5rem;
+        max-width: 200px;
+    }
+    .popup-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .popup-image {
+        margin-top: 1.5rem;
+        max-width: 200px;
+        transition: transform 0.3s ease; /* Added transition for smooth animation */
+    }
+    .popup-image:hover {
+        transform: scale(1.05);  /* Enlarge image on hover */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Add shadow on hover */
+    }
+    .popup-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 640px) {
+        #popup {
+            padding: 1.5rem;
+            flex-direction: column;
+            align-items: center;
+        }
+        #popup h2 {
+            font-size: 1.75rem;
+        }
+        #popup p {
+            font-size: 1rem;
+        }
+        #popup form {
+            gap: 0.75rem;
+        }
+        #popup form input,
+        #popup form button {
+            font-size: 1rem;
+            padding: 0.75rem;
+        }
+        .close-button {
+            font-size: 1.25rem;
+            top: 0.75rem;
+            right: 0.75rem;
+        }
+        .popup-image {
+            margin-top: 1rem;
+            max-width: 180px;
+        }
+    }
+    </style>
+</head>
+<body class="bg-gray-900 p-4 md:p-8">
+    <div class="max-w-6x1 mx-auto bg-white/5 backdrop-blur-md rounded-xl shadow-2xl border border-white/10 p-6 md:p-8 lg:p-10">
+        <header class="text-center py-10 animated-element appear">
+            <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4" style="font-size: 60px;">
+                Welcome
+            </h1>
+            <p class="text-lg text-gray-300 mb-6">
+                let's bring your business back to life by giving it a digital touch | <a href="https://www.intagram.com/dg.rippanjot?igsh=ejVpbjdhYzNkMDc5" class="insta"><u>dg.rippanjot</u>  </a>
+            </p>
+        </header>
+
+        <nav class="nav-container">
+            <a href="index.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="portfolio.html" class="nav-link">Portfolio</a>
+            <a href="blog.html" class="nav-link">Blogs</a>
+            <a href="contact.html" class="nav-link">Contact us</a>
+        </nav>
+
+        <section id="hero" class="animated-element appear">
+            <h1 class="text-5xl font-bold text-white">
+                Bring your business from zero to success 
+            </h1>
+            <p class="text-xl text-gray-200">
+                We design and develop user-friendly and visually appealing digital experiences. We solve problems and help you grow.
+            </p>
+            <a href="contact.html" class="cta-button">Get a Quote</a>
+        </section>
+
+        <section id="about" class="py-12 animated-element appear">
+            <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-semibold text-white mb-4">About Us</h2>
+                    <p class="text-gray-300">
+                        We are acreative studio dedicated to building digital products, brands, and experiences. We believe in the power of design and technology to transform businesses and improve lives. Our team of designers, developers, and strategists work collaboratively to deliver innovative solutions that meet our clients' needs and exceed their expectations. We are passionate about creating lasting partnerships and helping our clients achieve their goals.
+                    </p>
+                    <a href="about.html" class="mt-6 inline-block custom-button" style="color: #0569ff;">Learn More</a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/EEE/31343C" alt="About Us" class="about-us-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-12 animated-element appear">
+            <div class="section-header">
+                <h2 class="text-3xl font-semibold text-white">Our Services</h2>
+                <p class="text-gray-400">
+                    We offer a wide range of digital services to help businesses grow and succeed in the digital age.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card">
+                    <h3 class="text-xl font-semibold text-white mb-4">Social Media Management</h3>
+                    <p class="text-gray-300">
+                        Reclaim your time and boost your brand! Our social media management connects you with your audience and drives online results effortlessly.
+                    </p>
+                    <a href="services.html" class="mt-6 inline-block text-purple-300 hover:text-purple-400 transition-colors">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3 class="text-xl font-semibold text-white mb-4">SEO Copywriting</h3>
+                    <p class="text-gray-300">
+                        We craft compelling and persuasive copy that captures your brand's voice and drives conversions.
+                        Our copywriting services include website content, marketing materials, and ad copy.
+                    </p>
+                    <a href="services.html" class="mt-6 inline-block text-purple-300 hover:text-purple-400 transition-colors">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3 class="text-xl font-semibold text-white mb-4">Digital Branding</h3>
+                    <p class="text-gray-300">
+                        We create strong brand identities that resonate with your target audience and help you stand out from the competition.
+                    </p>
+                    <a href="services.html" class="mt-6 inline-block text-purple-300 hover:text-purple-400 transition-colors">Learn More</a>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="services.html" class="custom-button" style="color: #0569ff;">All Services</a>
+            </div>
+        </section>
+        <section id="blog" class="py-12 animated-element appear">
+            <div class="section-header">
+                <h2 class="text-3xl font-semibold text-white">Latest from Our Blog</h2>
+                <p class="text-gray-400">Insights and resources to help you stay ahead in digital marketing.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="blog-card">
+                    <img src="https://placehold.co/400x200/EEE/31343C" alt="Blog Post 1" style="height: 300px;width: 600px;">
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">The Future of SEO</h3>
+                        <p class="blog-card-text"> Non ipsam dignissimos et mollitia eligendi et obcaecati similique cum saepe quia. Non soluta quia et velit consectetur aut eligendi velit.Et quia aliquam est repellendus rerum et doloribus asperiores ab voluptatem velit. Et exercitationem odit qui nihil quae ut dolores mollitia. Sed dolorum cumque At beatae optio ab iusto tempora.
+                    </p>
+                        <a href="#" class="blog-card-link">
+                            Read More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://placehold.co/400x200/EEE/31343C" alt="Blog Post 2" style="height: 300px;width: 600px;">
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Mastering Social Media Ads</h3>
+                        <p class="blog-card-text"> Non ipsam dignissimos et mollitia eligendi et obcaecati similique cum saepe quia. Non soluta quia et velit consectetur aut eligendi velit.Et quia aliquam est repellendus rerum et doloribus asperiores ab voluptatem velit. Et exercitationem odit qui nihil quae ut dolores mollitia. Sed dolorum cumque At beatae optio ab iusto tempora.</p>
+                        <a href="#" class="blog-card-link">
+                            Read More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="https://placehold.co/400x200/EEE/31343C" alt="Blog Post 3" style="height: 300px;width: 600px;">
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">Email Marketing Best Practices</h3>
+                        <p class="blog-card-text"> Non ipsam dignissimos et mollitia eligendi et obcaecati similique cum saepe quia. Non soluta quia et velit consectetur aut eligendi velit.Et quia aliquam est repellendus rerum et doloribus asperiores ab voluptatem velit. Et exercitationem odit qui nihil quae ut dolores mollitia. Sed dolorum cumque At beatae optio ab iusto tempora.</p>
+                        <a href="#" class="blog-card-link">
+                            Read More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="blog.html" class="custom-button">Visit Our Blog</a>
+            </div>
+        </section>
+
+        <section id="portfolio" class="py-12 animated-element appear">
+            <div class="section-header">
+                <h2 class="text-3xl font-semibold text-white">Our Portfolio</h2>
+                <p class="text-gray-400">
+                    Check out some of our recent work. We've helped businesses of all sizes create amazing digital experiences.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="portfolio-item">
+                    <h3 class="text-xl font-semibold text-white mb-4">Project 1: Coming Soon...</h3>
+                    <p class="text-gray-300">
+                        My portfolio is currently under construction. I'm working hard to create a space that showcases my best work and reflects my skills. Please check back later!
+                    </p>
+                    <a href="portfolio.html" class="mt-4 inline-block text-purple-300 hover:text-purple-400 transition-colors">View Project</a>
+                </div>
+                <div class="portfolio-item">
+                    <h3 class="text-xl font-semibold text-white mb-4">Project 2:Coming Soon...</h3>
+                    <p class="text-gray-300">
+                        My portfolio is currently under construction. I'm working hard to create a space that showcases my best work and reflects my skills. Please check back later!
+                    </p>
+                     <a href="portfolio.html" class="mt-4 inline-block text-purple-300 hover:text-purple-400 transition-colors">View Project</a>
+                </div>
+                <div class="portfolio-item">
+                    <h3 class="text-xl font-semibold text-white mb-4">Project 3: Coming Soon...</h3>
+                    <p class="text-gray-300">
+                        My portfolio is currently under construction. I'm working hard to create a space that showcases my best work and reflects my skills. Please check back later!
+                    </p>
+                    <a href="portfolio.html" class="mt-4 inline-block text-purple-300 hover:text-purple-400 transition-colors">View Project</a>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="portfolio.html" class="custom-button" style="color: #0569ff;">See More</a>
+            </div>
+        </section>
+
+        <section id="contact" class="py-12 animated-element appear">
+            <h2 class="text-3xl font-semibold text-white text-center mb-8">Contact Us</h2>
+            <div class="text-center">
+                <a href="contact.html" class="custom-button" style="color: #0569ff;">Get in Touch</a>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <div id="footer-top">
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html">Social Media Management</a></li>
+                        <li><a href="services.html">SEO Copywriting</a></li>
+                        <li><a href="services.html">Digital Branding</a></li>
+                        <li><a href="services.html">Web Design</a></li>
+                        <li><a href="services.html">digital marketing</a></li>
+                        <li><a href="services.html">content writing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Specialties</h3>
+                    <ul>
+                        <li><a href="services.html">social media management</a></li>
+                        <li><a href="services.html">Search Engine Optimization</a></li>
+                        <li><a href="services.html">Content writing</a></li>
+                        <li><a href="services.html">SEO Copywriting</a></li>
+                        <li><a href="services.html">Brand Strategy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Who can take these services</h3>
+                <ul>
+                    <li><a href="contact.html"> Businesses</a></li>
+                    <li><a href="contact.html"> businesses</a></li>
+                    <li><a href="contact.html">Small businesses</a></li>
+                    <li><a href="contact.html">Startup Owners</a></li>
+                    <li><a href="contact.html">Freelancers</a></li>
+                </ul>
+                </div>
+                <div id="footer-form">
+                    <h3>Request a Quote</h3>
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div id="footer-bottom">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/1DuYTwnjJX/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/channel/UC1nTiupouMW-ijlShvCkDAQ" aria-label="youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.intagram.com/dg.rippanjot?igsh=ejVpbjdhYzNkMDc5" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/rippan-jot-41310b359?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p class="copyright">© 2025. All rights reserved. | Designed by <a href="https://www.intagram.com/dg.rippanjot?igsh=ejVpbjdhYzNkMDc5" target="_blank" rel="noopener noreferrer\">dg.rippanjot</a></p>
+            </div>
+        </footer>
+    </div>
+    <div id="popup-container">
+        <div id="popup">
+            <span class="close-button">&times;</span>
+            <h2>Get Your Free E-book!</h2>
+            <p>Enter your name and email address below to download your free copy of our latest e-book on digital marketing.</p><div class="popup-image">
+                <img src="pic/Gemini_Generated_Image_sx1ngvsx1ngvsx1n.jpg" alt="E-book Cover" style="margin:auto; width: 200px; height: 280px;">
+            </div><br/>
+            <form id="ebook-form">
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit" style="color: #0569ff;">Download Now</button>
+            </form>
+            
+        </div>
+    </div>
+    <script>
+        const popupContainer = document.getElementById('popup-container');
+        const popup = document.getElementById('popup');
+        const closeButton = popup.querySelector('.close-button');
+        const ebookForm = document.getElementById('ebook-form');
+    
+        let popupShown = false;
+    
+        function showPopup() {
+            popupContainer.style.display = 'flex';
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 10);
+            popupShown = true;
+        }
+    
+        function hidePopup() {
+            popup.classList.remove('show');
+            setTimeout(() => {
+                popupContainer.style.display = 'none';
+            }, 300);
+        }
+    
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / document.documentElement.scrollHeight) * 100;
+            if (scrollPercentage > 20 && !popupShown) {
+                showPopup();
+            }
+        });
+    
+        closeButton.addEventListener('click', hidePopup);
+    
+        ebookForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const name = ebookForm.querySelector('input[name="name"]').value;
+            const email = ebookForm.querySelector('input[name="email"]').value;
+            if (name && email) {
+                alert(`Thank you for subscribing, ${name}! A link to download the e-book has been sent to ${email}.`);
+                hidePopup();
+                ebookForm.reset();
+            } else {
+                alert('Please enter your name and email address.');
+            }
+        });
+    </script>
+</body>
+</html>
